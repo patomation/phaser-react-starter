@@ -4,28 +4,13 @@ import phaserReact from 'phaser3-react'
 import 'phaser'
 import MainScene from './scenes/MainScene'
 
-function App () {
-  const [message, setMessage] = useState('Hello World')
-
-  function handleClick () {
-    setMessage('Good Job!!!')
-  }
-
-  return (
-    <div>
-      {{ message }}
-      test
-      <button onClick={handleClick}>
-        Click Here for Validation
-        </button>
-    </div>
-  )
-}
-
-
-const config = {
-  parent: 'react',
+// if (module && module.hot) {
+//   module.hot.accept()
+// }
+const game = new Phaser.Game({
+  parent: 'root',
   dom: { createContainer: true },
+  backgroundColor: '#111',
   plugins: {
     global: [
       {
@@ -35,13 +20,24 @@ const config = {
       }
     ]
   },
+  // width: 800,
+  // height: 600,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    parent: 'phaser',
+    // autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 1100,
+    height: 600,
+  },
+  physics: {
+    default: 'arcade',
+    arcade: {
+      // gravity: { y: 50 },
+      debug: true
+    }
+  },
   scene: [
     MainScene
-  ]
-}
-
-const game = new Phaser.Game(config)
-// ReactDom.render(
-//   <App/>,
-//   document.getElementById('react')
-// )
+  ],
+  pixelArt: true
+})
