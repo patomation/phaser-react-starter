@@ -67,27 +67,24 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update (time, delta) {
-    const maxVelocity = 100 
+    const maxVelocity = 200 
     if(!this.velocityX) this.velocityX = 0
-    console.log(this.velocityX);
+    if(!this.velocityY) this.velocityY = 0
+    console.log(this.velocityX, this.velocityY);
     if (this.keyboard.D.isDown === true) {
-      if(maxVelocity > this.velocityX) {
-        this.velocityX += 10
-      }
+      if(maxVelocity > this.velocityX) this.velocityX += 10
     }
-    // if(this.keyboard.D.isUp === true) {
-    //   this.
-    // }
     if (this.keyboard.A.isDown === true) {
-      this.velocityX -= 10
+      if(-maxVelocity < this.velocityX) this.velocityX -= 10
     }
     if (this.keyboard.W.isDown === true) {
-      this.player.setVelocityY(-64)
+      if(-maxVelocity < this.velocityY) this.velocityY -= 10
     }
     if (this.keyboard.S.isDown === true) {
-      this.player.setVelocityY(64)
+      if(maxVelocity > this.velocityY) this.velocityY += 10
     }
     this.player.setVelocityX(this.velocityX)
+    this.player.setVelocityY(this.velocityY)
 
   }
 
